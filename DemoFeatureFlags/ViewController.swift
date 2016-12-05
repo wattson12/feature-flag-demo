@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         
         #endif
         
-        if Feature.isRunTimeFeatureEnabled {
+        if RunFeature.isEnabled(.runTimeFeature) {
             
             let button = UIButton(type: .custom)
             button.setTitle("Use run time feature", for: .normal)
