@@ -1,3 +1,4 @@
 #include "Pods/Target Support Files/Pods-DemoFeatureFlags/Pods-DemoFeatureFlags.debug.xcconfig"
 
-FEATURE_TEST = TRUE
+OTHER_SWIFT_FLAGS = $(inherited) -D BUILD_TIME_FEATURE
+ENABLED_FEATURES = RUN_TIME_FEATURE
