@@ -38,6 +38,30 @@ private func featureNameFromCurrentFunction(functionName: String = #function) ->
         }.joined().uppercased()
 }
 
+enum RunFeature: String {
+    case runTimeFeature
+    
+    var defaultsKey: String {
+        return rawValue.unicodeScalars.enumerated().map { index, character -> String in
+            
+            if CharacterSet.uppercaseLetters.contains(character) && index != 0 {
+                return "_" + character.description
+            }
+            
+            return character.description
+            }.joined().uppercased()
+
+    }
+    
+    static func isEnabled(_ feature: RunFeature, inBundle bundle: Bundle = Bundle.main, checkingUserDefaults userDefaults: UserDefaults = .standard) -> Bool {
+        if let userDefaultsFlag = userDefaults.object(forKey: feature.defaultsKey) as? Bool {
+            return userDefaultsFlag
+        }
+        
+        return bundle.enabledFeatureList.contains(feature.defaultsKey)
+    }
+}
+
 struct Feature {
     
     @available(*, unavailable)
